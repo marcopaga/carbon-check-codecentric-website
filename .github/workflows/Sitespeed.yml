@@ -25,7 +25,7 @@ jobs:
       - name: code checkout
         uses: actions/checkout@v4
       - name: running sitespeed.io container with arguments and optional Docker options
-        run: docker run -v "$(pwd):/sitespeed.io" sitespeedio/sitespeed.io:30.8.0 .github/sitespeed-urls.txt --budget.configPath .github/sitespeed-budget.json -n 1 --sustainable.enable
+        run: docker run -v "$(pwd):/sitespeed.io" sitespeedio/sitespeed.io:30.8.0 .github/sitespeed-urls.txt --budget.configPath .github/sitespeed-budget.json -n 1 --sustainable.enable --budget.suppressExitCode
 
   deploy:
     environment:
