@@ -13,20 +13,7 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
-
 jobs:
-  run-sitespeed:
-    runs-on: ubuntu-latest
-    name: running sitespeed.io
-    steps:
-      - name: code checkout
-        uses: actions/checkout@v4
-      - name: running sitespeed.io container with arguments and optional Docker options
-        run: docker run -v "$(pwd):/sitespeed.io" sitespeedio/sitespeed.io:30.8.0 .github/sitespeed-urls.txt --budget.configPath .github/sitespeed-budget.json -n 1 --sustainable.enable --budget.suppressExitCode
-
   deploy:
     environment:
       name: github-pages
@@ -35,6 +22,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: running sitespeed.io container with arguments and optional Docker options
+        run: docker run -v "$(pwd):/sitespeed.io" sitespeedio/sitespeed.io:30.8.0 .github/sitespeed-urls.txt --budget.configPath .github/sitespeed-budget.json -n 1 --sustainable.enable --budget.suppressExitCode
       - name: Setup Pages
         uses: actions/configure-pages@v2
       - name: Upload artifact
