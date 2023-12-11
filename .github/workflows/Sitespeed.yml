@@ -23,14 +23,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: running sitespeed.io container with arguments and optional Docker options
-        run: docker run -v "$(pwd):/sitespeed.io" sitespeedio/sitespeed.io:30.8.0 .github/sitespeed-urls.txt --budget.configPath .github/sitespeed-budget.json -n 1 --sustainable.enable --budget.suppressExitCode
+        run: docker run -v "$(pwd):/sitespeed.io" sitespeedio/sitespeed.io:30.8.0 .github/sitespeed-urls.txt --budget.configPath .github/sitespeed-budget.json -n 1 --sustainable.enable --budget.suppressExitCode --outputFolder sitespeed-result/
       - name: Setup Pages
         uses: actions/configure-pages@v2
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
           # Upload entire repository
-          path: './sitespeed-result/www.codecentric.de/'
+          path: './sitespeed-result/'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
